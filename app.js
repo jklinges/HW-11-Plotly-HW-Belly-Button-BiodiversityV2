@@ -41,10 +41,15 @@ var drawChart = function(x_data, y_data, hoverText, metadata) {
 
 };
 
-var populateDropdown = function(names) {
+ function populateDropdown(names) {
 
   var selectTag = d3.select("#selDataset");
   var options = selectTag.selectAll('option').data(names);
+
+//   d3.json("data/samples.json").then((data) => {
+//       console.log(data.names);
+
+//   });
 
   options.enter()
       .append('option')
@@ -87,9 +92,11 @@ var optionChanged = function(newValue) {
 };
 
 d3.json("data/samples.json").then(function(data) {
+    console.log(data.names);
+
 
   //Populate dropdown with names
-  populateDropdown(data["names"]);
+  populateDropdown(data.names);
 
   //Populate the page with the first value
   x_data = data["samples"][0]["otu_ids"];
